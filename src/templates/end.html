@@ -1,0 +1,5 @@
+{% extends "base.html" %}
+{% block content %}
+    <p id="congratulations">Gratulacje!<br>Wygrał {{ winner }}</p>
+    <a class="" href="{{ url_for('index') }}" id="graj">Zacznij ponownie grę</a>
+{% endblock %}

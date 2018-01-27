@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <section id="players_cards">
+    <header>
+        <h2>Gracze</h2>
+    </header>
+        {% for player in players %}
+            {{ player.say_about_yourself() }}<br>
+            {% if player.active %}
+                <article>
+                    <form action="{{ url_for('play_human') }}" method="post">
+                        {% for i in range(0, player.hand|length) %}
+                            <input type="checkbox" name="card" value="{{ i }}" id="{{ i }}">
+                            {% set card_url = player.hand[i].url %}
+                            <label for="{{ card }}"><img src="{{ url_for('static', filename='web/images/'+card_url)}}" class="card"></label>
+                        {% endfor %}
+                        <button type="submit">Zagraj</button><br>
+                    </form>
+                    {% if next_label != 1 %} {# wyświetl tylko wtedy, gdy kotś nie zagrał już kartami #}
+                        <form action="{{ url_for('play_take_from_stack') }}" method="post">
+                                <input type="radio" name="from_stack" value="{{ 4 }}">
+                                <label for="{{ from_stack }}">4</label>
+                                <input type="radio" name="from_stack" value="{{ 5 }}">
+                                <label for="{{ from_stack }}">5</label>
+                            <button type="submit">Ciągnij karty ze stosu.</button><br>
+                        </form>
+                    {% endif %}
+                    {% if next_label == 1 %}
+                        <form action="{{ url_for('play_human_next') }}" method="get">
+                            <button type="submit">Zakończ</button><br>
+                        </form>
+                    {% endif %}
+                </article>
+            {% else %}
+                <article>
+                    {% for i in range(0, player.hand|length) %}
+                        <img src="{{ url_for('static', filename='web/images/back.png') }}" class="card back">
+                    {% endfor %}
+                </article>
+            {% endif %}
+             <hr>
+        {% endfor %}
+        <article>
+            Lista graczy: {{ players }}
+            Aktywny player: {{ a_player }}
+        </article>
+    </section>
+    <section id="stack_cards">
+    <header>
+        <h2>Stos</h2>
+    </header>
+        {% for card in stack %}
+            <img src="{{ url_for('static', filename='web/images/'+card.url)}}" class="card">
+        {% endfor %}
+    </section>
+{% endblock %}
+
+

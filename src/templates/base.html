@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head lang="pl">
+    <meta charset="UTF-8">
+    <title>Gra w Pana</title>
+    <meta name="keywords" content="Pan, gra, Python">
+    <meta name="author" content="Małgorzata Dębowska">
+    <link rel="stylesheet" type="text/css" href="../static/web/style.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+{#    <link rel="stylesheet" type="text/css" href="{{ url_for('web', filename='bootstrap.css') }}">#}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <header>
+        GRA W PANA
+    </header>
+    <main>
+        {% block content %}
+            Strona pojawi się wkrótce
+        {% endblock %}
+    </main>
+    <div class="clear"></div>
+    <footer>
+        Copyright by Małgorzata Dębowska
+    </footer>
+{#    <script src="{{ asset('js/bootstrap.js') }}"></script>#}
+{#    <script src="{{ asset('js/scripts.js') }}"></script>#}
+</body>
+</html>

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% for player in players %}
+        {{ player.say_about_yourself() }}<br>
+        {% for i in range(0, player.hand|length) %}
+            <img src="{{ url_for('static', filename='web/images/back.png') }}" class="card">
+        {% endfor %}<br>
+    {% endfor %}
+    Lista graczy: {{ players }}
+    <a href="{{ url_for('play_human') }}" id="graj">GRAJ!</a>
+{% endblock %}
+
+
