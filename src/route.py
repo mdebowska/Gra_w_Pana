@@ -5,12 +5,7 @@ from src import ComputerClass
 from src import CardClass
 from src import GameClass
 import random
-
-
-
-#secret_key for session
-
-
+import sess
 
 @app.route('/')
 def index():
@@ -48,30 +43,8 @@ def play():
     :return:
     """
 
-    # if request.form.get('card'):
-    #     session['card'] = request.form.get('card')
-    #     print(session)
-    #
-    #     game.stack.append(session['card'])
-    #     return redirect(url_for('game_human'), code=302)
-
-
-
-
-    #początek gry - resetowanie ustawień: ustawienie tablicy do losowania kart
-# ja = PersonClass.Person('Gosia')
-# computer = PersonClass.Person('Komputer')
-    # ja.take_cards_start()
-    # computer.take_cards_start()
-
-
-#players = [ja, computer] #game.players
-#game.add_players(players)
-
-
-    #----------------
-
-    # game.add_to_stack(ja.hand, ja)
+    
+    
     global game
     game = GameClass.Game()
     h_players = []

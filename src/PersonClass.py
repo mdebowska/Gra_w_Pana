@@ -1,12 +1,10 @@
-import random
+﻿import random
 from src import CardClass
 from src import GameClass
 
 names = ['Ada', 'Justyna', 'Gosia', 'Maciej', 'Wiesław', 'Krysia', 'Marian', 'John', 'Jane']
 
 class Person:
-    def say_hello(self):
-        print('I say hello!')
 
     def __init__(self, name):
         self.name = name
