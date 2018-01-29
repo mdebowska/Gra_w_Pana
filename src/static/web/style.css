@@ -16,6 +16,7 @@ body>footer{
 
 body{
     background-color: #fcfcfc;
+    font-family: 'Consolas', 'Deja Vu Sans Mono', 'Bitstream Vera Sans Mono', monospace;
 }
 
 .card{
@@ -35,7 +36,7 @@ body{
     background-color: orange;
     text-decoration: none;
 
-    position: absolute;
+    /*position: absolute;*/
     left: 47%;
     top: 49%;
 }
