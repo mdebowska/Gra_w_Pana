@@ -28,3 +28,39 @@ class Person:
     def check_if_winner(self):
         if len(self.hand) == 0:
             return True
+
+
+    def set_useful_cards(self, game):
+        """
+        Ustawia Trure dla użyteżcznych kart (tzn można nimi zagrać)
+        :return:
+        """
+        for card in self.hand:
+            if card.value >= game.stack[len(game.stack)-1].value:
+                if len(self.layed_card) > 0:
+                    if  self.layed_card[0].value == card.value:
+                        card.useful = True
+                        print("usefulA: ", card)
+                    else:
+                        card.useful = False
+                        print("NIEusefulA: ", card)
+                else:
+                    card.useful = True
+                    print("usefulB: ", card)
+            else:
+                card.useful = False
+                print("NIEusefulC: ", card)
+
+    def make_useful_list(self):
+        """
+        Tworzy listę zero-jedynkową użytecznych kart
+        :return: list
+        """
+        useful_list=[]
+        for card in self.hand:
+           if card.useful:
+               useful_list.append(1)
+           else:
+               useful_list.append(0)
+
+        return useful_list

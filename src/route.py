@@ -22,12 +22,15 @@ def index():
     #     bool_game = 0
 
     try:
-        if game:
-            game_time = strftime("godziny: %H:%M, dnia: %d.%m.%Y", gmtime())   #w przypadku zakończenia gry czas jest ustawiany na 0, więc nawet jeśli tu wejdziemy, to zwrócimy to samo co w wypadku, gdy gry nigdy nie było
+        if game and game.time!= 0:
+            game_duration = datetime.datetime.now() - game.time #w przypadku zakończenia gry czas jest ustawiany na 0, więc nawet jeśli tu wejdziemy, to zwrócimy to samo co w wypadku, gdy gry nigdy nie było
+            game_duration = str(game_duration)[:7]
+        else:
+            game_duration = 0
     except NameError:
-        game_time = 0
+        game_duration = 0
 
-    return render_template('index.html', game_time = game_time)
+    return render_template('index.html', game_time = game_duration)
 
 
 
@@ -60,6 +63,7 @@ def play():
     
     global game
     game = GameClass.Game()
+    # game.time = strftime("godziny: %H:%M:%S, dnia: %d.%m.%Y", gmtime())
     game.time = datetime.datetime.now()
     h_players = []
     for x in range(session['n_people']):
@@ -83,8 +87,8 @@ def play():
     return render_template('game_start.html', players=game.players)
 
 
-@app.route('/game/human', methods=['GET','POST'])
-def play_human():
+@app.route('/game/play', methods=['GET','POST'])
+def play_game():
     """
     Human turn page
     :return:
@@ -92,7 +96,7 @@ def play_human():
 
     active_player = game.find_active_player()
 
-    if game.stack == []:
+    if game.stack == []:    #sam początek gry
         game.add_to_stack([CardClass._9s], active_player)
         if active_player.layed_card:
             next_label = 1
@@ -102,7 +106,9 @@ def play_human():
     else:
         next_label = 0 #nie wiadomo, czy ktoś rzucił już kartami, więc domyślnie jest 0
 
-
+    active_player.set_useful_cards(game)
+    card_useful_list = active_player.make_useful_list()
+    print(card_useful_list)
     if request.form.getlist('card'):    #jeśli pobrano listę kart do zagrania to:
         cards = []
 
@@ -123,7 +129,8 @@ def play_human():
         next_label = 1  # informacja, że karty zostały rzucone => można wyświetlić przycisk "zakończ"
 
 
-    return render_template('game.html', players=game.players, a_player = active_player, stack = game.stack, next_label = next_label)
+
+    return render_template('game.html', players=game.players, a_player = active_player, stack = game.stack, next_label = next_label, card_useful = card_useful_list)
 
 @app.route('/game/human/next', methods=['GET','POST'])
 def play_human_next():
@@ -140,8 +147,15 @@ def play_human_next():
     active_player.layed_card = []
     game.swich_active_person(1)
 
-    return redirect(url_for('play_human'))
+    return redirect(url_for('play_game'))
 
+@app.route('/game/play/add', methods=['GET','POST'])
+def play_game_add():
+    """
+    Human turn page after adding card to stack
+    :return:
+    """
+    return redirect(url_for('settings'))
 
 @app.route('/game/take', methods=['GET','POST'])
 def play_take_from_stack():
@@ -157,7 +171,7 @@ def play_take_from_stack():
         print('coś poszło nie tak')
 
 
-    return redirect(url_for('play_human'))
+    return redirect(url_for('play_game'))
 
 @app.route('/game/end')
 def end():

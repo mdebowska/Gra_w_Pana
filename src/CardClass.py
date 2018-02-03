@@ -3,6 +3,7 @@ class Card:
         self.value = value
         self.color = color
         self.url = url
+        self.useful = False
 
     def __repr__(self):
         return '%s' % (self.url[:3])

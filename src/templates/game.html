@@ -9,12 +9,16 @@
             {{ player.say_about_yourself() }}<br>
             {% if player.active %}
                 <article>
-                    <form action="{{ url_for('play_human') }}" method="post">
+                    <form action="{{ url_for('play_game') }}" method="post"> {# nie wiem czemu nie chce wejść do żadnej innej funkcji niż play_game #}
                         {% for i in range(0, player.hand|length) %}
                             <input type="checkbox" name="card" value="{{ i }}" id="{{ i }}" class="hidden">
                             {% set card_url = player.hand[i].url %}
                             {% set card_id = 'card' +  i | string %}
-                            <label for="{{ card }}"><img src="{{ url_for('static', filename='web/images/'+card_url)}}" onclick="Toggle_card('{{ i }}')" class="card" id="{{ card_id }}"/></label>
+{#                            {% if card_useful[i] %}#}
+                                <label for="{{ card }}"><img src="{{ url_for('static', filename='web/images/'+card_url)}}" onclick="Toggle_card('{{ i }}')" class="card" id="{{ card_id }}"/></label>
+{#                            {% else %}#}
+{#                                <label for="{{ card }}"><img src="{{ url_for('static', filename='web/images/'+card_url)}}" style="filter: brightness(0.8)" onclick="Toggle_card('{{ i }}')" class="card" id="{{ card_id }}"/></label>#}
+{#                            {% endif %}#}
                         {% endfor %}
                         <button type="submit">Zagraj</button><br>
                     </form>
