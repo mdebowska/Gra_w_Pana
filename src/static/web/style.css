@@ -2,6 +2,10 @@
     clear: both;
 }
 
+.hidden{
+    display: none;
+}
+
 body>header{
     top:0;
     background-color: orange;
@@ -25,6 +29,13 @@ body{
     border-radius: 7px;
 }
 
+.checked{
+    border: 1px solid red;
+    transform: scale(1.1);
+    filter:brightness(1.1);
+    transition:0.3s cubic-bezier(0.165, 0.840, 0.440, 1.000);
+}
+
 .card.back{
     width: 60px;
     margin-right: -20px;
@@ -39,6 +50,16 @@ body{
     /*position: absolute;*/
     left: 47%;
     top: 49%;
+}
+p.warning{
+    color: red;
+    font-weight: bold;
+}
+a.warning{
+    background-color: red!important;
+    padding: 5px;
+    font-size: 0.8em;
+    font-weight: bold;
 }
 
 article{

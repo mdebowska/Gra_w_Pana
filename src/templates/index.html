@@ -24,5 +24,11 @@
                 <li>Jeśli zostanie wyłożona karta w kolorze wina kolejka przechodzi na poprzedniego gracza.</li>
             </ul>
         </section>
-    <a class="" href="{{ url_for('settings') }}" id="graj">Zacznij grę</a>
+    {% if game_time %}
+        <p class="warning">Ktoś teraz gra od {{ game_time }}. Jeśli dasz start, przerwiesz komuś grę.</p>
+        <a class="warning" href="{{ url_for('settings') }}" id="graj">Zacznij grę</a>
+    {% else %}
+        <a class="" href="{{ url_for('settings') }}" id="graj">Zacznij grę</a>
+    {% endif %}
+
 {% endblock %}

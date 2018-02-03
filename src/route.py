@@ -5,6 +5,8 @@ from src import ComputerClass
 from src import CardClass
 from src import GameClass
 import random
+import datetime
+from time import gmtime, strftime
 import sess
 
 @app.route('/')
@@ -14,7 +16,18 @@ def index():
     :return:
     """
     session.clear()
-    return render_template('index.html')
+    # if game in globals():
+    #     bool_game = 1
+    # else:
+    #     bool_game = 0
+
+    try:
+        if game:
+            game_time = strftime("godziny: %H:%M, dnia: %d.%m.%Y", gmtime())   #w przypadku zakończenia gry czas jest ustawiany na 0, więc nawet jeśli tu wejdziemy, to zwrócimy to samo co w wypadku, gdy gry nigdy nie było
+    except NameError:
+        game_time = 0
+
+    return render_template('index.html', game_time = game_time)
 
 
 
@@ -47,6 +60,7 @@ def play():
     
     global game
     game = GameClass.Game()
+    game.time = datetime.datetime.now()
     h_players = []
     for x in range(session['n_people']):
         person = PersonClass.Person('Player%d'%(x+1))
@@ -147,5 +161,5 @@ def play_take_from_stack():
 
 @app.route('/game/end')
 def end():
-
+    game.time = 0
     return render_template('end.html', winner = game.find_active_player())

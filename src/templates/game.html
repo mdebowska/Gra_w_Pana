@@ -11,9 +11,10 @@
                 <article>
                     <form action="{{ url_for('play_human') }}" method="post">
                         {% for i in range(0, player.hand|length) %}
-                            <input type="checkbox" name="card" value="{{ i }}" id="{{ i }}">
+                            <input type="checkbox" name="card" value="{{ i }}" id="{{ i }}" class="hidden">
                             {% set card_url = player.hand[i].url %}
-                            <label for="{{ card }}"><img src="{{ url_for('static', filename='web/images/'+card_url)}}" class="card"></label>
+                            {% set card_id = 'card' +  i | string %}
+                            <label for="{{ card }}"><img src="{{ url_for('static', filename='web/images/'+card_url)}}" onclick="Toggle_card('{{ i }}')" class="card" id="{{ card_id }}"/></label>
                         {% endfor %}
                         <button type="submit">Zagraj</button><br>
                     </form>
