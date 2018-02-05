@@ -1,34 +1,36 @@
 {% extends "base.html" %}
 {% block content %}
-    <h2>Zasady gry</h2>
-    <article>
-        <section>
-            <header><h3>Karty</h3></header>
-            <p>W grze biorą udział karty od 9 do asa (9, 10, J, D, K, A) po jednej w każdym kolorze (serce, dzwonki, wino, żołądź). Razem 24 karty.</p>
-        </section>
-        <section>
-            <header><h3>Cel</h3></header>
-            <p>Warunkiem wygrania jest pozbycie się wszystkich kart z ręki.</p>
-        </section>
-        <section>
-            <header><h3>Start</h3></header>
-            <p>Na starcie karty są równo rozdane pomiędzy graczami. Rozpoczyna gracz posiadający kartę 9 serce (którą od razu wykłada).</p>
-        </section>
-        <section>
-            <header><h3>Przebieg i zasady rozgrywki</h3></header>
-            <ul>
-                <li>Na środek gracze rzucają swoje karty, które są równe lub wyższe w stosunku do ostatniej już położonej.</li>
-                <li>Jeśli gracz nie posiada takiej, bądź nie chce jej położyć, musi ciągnąć 3 lub 4 karty z wyłożonych na środku.</li>
-                <li>Na stole zawsze musi zostać jedna karta (9 serce)</li>
-                <li>Jeśli gracz posiada 3 lub 4 karty z tą samą figurą, może je wyłożyć w jednej kolejce.</li>
-                <li>Jeśli zostanie wyłożona karta w kolorze wina kolejka przechodzi na poprzedniego gracza.</li>
-            </ul>
-        </section>
-    {% if game_time %}
-        <p class="warning">Ktoś teraz gra od {{ game_time }}. Jeśli dasz start, przerwiesz komuś grę.</p>
-        <a class="warning" href="{{ url_for('settings') }}" id="graj">Nie obchodzi mnie to - Start!</a>
-    {% else %}
-        <a class="" href="{{ url_for('settings') }}" id="graj">Zacznij grę</a>
-    {% endif %}
-
+    <div  class="inside-width">
+        <h2>Zasady gry</h2>
+        <article>
+            <section>
+                <header><h3>Karty</h3></header>
+                <p>W grze biorą udział karty od 9 do asa (9, 10, J, D, K, A) po jednej w każdym kolorze (serce, dzwonki, wino, żołądź). Razem 24 karty.</p>
+            </section>
+            <section>
+                <header><h3>Cel</h3></header>
+                <p>Warunkiem wygrania jest pozbycie się wszystkich kart z ręki.</p>
+            </section>
+            <section>
+                <header><h3>Start</h3></header>
+                <p>Na starcie karty są równo rozdane pomiędzy graczami. Rozpoczyna gracz posiadający kartę 9 serce (którą od razu wykłada).</p>
+            </section>
+            <section>
+                <header><h3>Przebieg i zasady rozgrywki</h3></header>
+                <ul>
+                    <li>Na środek gracze rzucają swoje karty, które są równe lub wyższe w stosunku do ostatniej już położonej.</li>
+                    <li>Jeśli gracz nie posiada takiej, bądź nie chce jej położyć, musi ciągnąć 3 lub 4 karty z wyłożonych na środku.</li>
+                    <li>Na stole zawsze musi zostać jedna karta (9 serce)</li>
+                    <li>Jeśli gracz posiada 3 lub 4 karty z tą samą figurą, może je wyłożyć w jednej kolejce.</li>
+                    <li>Jeśli zostanie wyłożona karta w kolorze wina kolejka przechodzi na poprzedniego gracza.</li>
+                </ul>
+            </section>
+            {% if game_time %}
+                <p class="warning">Ktoś teraz gra od {{ game_time }}. Jeśli dasz start, przerwiesz komuś grę.</p>
+                <a class="warning" href="{{ url_for('settings') }}" id="zacznij">Nie obchodzi mnie to - Start!</a>
+            {% else %}
+                <a class="" href="{{ url_for('settings') }}" id="zacznij">Zacznij grę</a>
+            {% endif %}
+        </article>
+    </div>
 {% endblock %}

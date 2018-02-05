@@ -1,13 +1,19 @@
 {% extends "base.html" %}
 
 {% block content %}
+    <section id="players_cards">
+    <header>
+        <h2>Gracze</h2>
+    </header>
     {% for player in players %}
         {{ player.say_about_yourself() }}<br>
         {% for i in range(0, player.hand|length) %}
-            <img src="{{ url_for('static', filename='web/images/back.png') }}" class="card">
+            <img src="{{ url_for('static', filename='web/images/back.png') }}" class="card back">
         {% endfor %}<br>
     {% endfor %}
-    Lista graczy: {{ players }}
+{#    Lista graczy: {{ players }}#}
+
+    </section>
     <a href="{{ url_for('play_game') }}" id="graj">GRAJ!</a>
 {% endblock %}
 

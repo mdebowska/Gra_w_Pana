@@ -5,7 +5,9 @@ from src import GameClass
 names = ['Ada', 'Justyna', 'Gosia', 'Maciej', 'Wiesław', 'Krysia', 'Marian', 'John', 'Jane']
 
 class Person:
-
+    """
+    Klasa gracza
+    """
     def __init__(self, name):
         self.name = name
         self.hand = []
@@ -17,15 +19,28 @@ class Person:
         return self.name
 
     def say_about_yourself(self):
-        return 'Jestem %s, a w ręce trzymam %d kart. Są to: ' % (self.name, len(self.hand))#, str(self.hand))
+        """
+        Funkcja informująca o stanie gracza
+        :return:
+        """
+        return '%s: %d kart' % (self.name, len(self.hand))
+        # return 'Jestem %s, a w ręce trzymam %d kart. Są to: ' % (self.name, len(self.hand))#, str(self.hand))
 
 
     def take_card(self):
+        """
+        Dodanie karty z talii do ręki gracza
+        :return:
+        """
         card = random.choice(CardClass.all_cards)
         CardClass.all_cards.remove(card)
         self.hand.append(card)
 
     def check_if_winner(self):
+        """
+        Sprawdza, czy dany gracz wygrał
+        :return:
+        """
         if len(self.hand) == 0:
             return True
 

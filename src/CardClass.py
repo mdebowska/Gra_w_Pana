@@ -1,4 +1,7 @@
 class Card:
+    """
+    Klasa kart w talii
+    """
     def __init__(self, value, color, url=''):
         self.value = value
         self.color = color
@@ -6,6 +9,9 @@ class Card:
         self.useful = False
 
     def __repr__(self):
+        """
+        :return: nazwa grafiki bez rozszeżenia .png lub .jpg
+        """
         return '%s' % (self.url[:3])
 
 
@@ -36,6 +42,10 @@ _Aw = Card(14, 'w', 'Aw.png')
 
 
 def restart_cards():
+    """
+    ustawia listę kard do rozdawania na początku gry
+    :return:
+    """
     global all_cards
     all_cards = [_9s, _9d, _9z, _9w, _10s, _10d, _10z, _10w, _Js, _Jd, _Jz, _Jw, _Ds, _Dd, _Dz, _Dw, _Ks, _Kd, _Kz, _Kw,
                  _As, _Ad, _Az, _Aw, ]
@@ -45,6 +55,11 @@ restart_cards()
 
 
 def add_to_stack(cards):
+    """
+    dodawanie do stosu listy kart
+    :param cards:
+    :return:
+    """
     global stack
     for card in cards:
         stack.append(card)

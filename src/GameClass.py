@@ -17,6 +17,10 @@ class Game:
 
 
     def restart(self):
+        """
+        resetuje ustawienia - nadaje początkowe
+        :return:
+        """
         self.players = []
         CardClass.restart_cards()
 
@@ -66,6 +70,10 @@ class Game:
             self.players.append(player)
 
     def take_cards_start(self):
+        """
+        losuje karty dla gracza
+        :return:
+        """
         if self.players:
             for player in self.players:
                 for i in range(1, int((24/len(self.players))+1)):
