@@ -20,19 +20,31 @@
 {#                                <label for="{{ card }}"><img src="{{ url_for('static', filename='web/images/'+card_url)}}" style="filter: brightness(0.8)" onclick="Toggle_card('{{ i }}')" class="card" id="{{ card_id }}"/></label>#}
 {#                            {% endif %}#}
                         {% endfor %}
-                        <button type="submit">Zagraj</button><br>
+                        <br><button type="submit">Zagraj <i class="fa">&#xf0da;</i></button>
+                    </form>
+                    <form action="{{ url_for('play_last') }}" method="post">
+                        {% for i in range(0, player.hand|length) %}
+                            {% set last_id = 'last' +  i | string %}
+                            <input type="radio" name="last_card" value="{{ i }}" id="{{ last_id }}" class="hidden">
+{#                            <label for={{ last_card }}>{{ last_id }}</label>#}
+                        {% endfor %}
+                        <button type="submit">Na koniec <i class="material-icons">&#xe5dd;</i></button>
                     </form>
                     {% if next_label != 1 %} {# wyświetl tylko wtedy, gdy kotś nie zagrał już kartami #}
                         <form action="{{ url_for('play_take_from_stack') }}" method="post">
-                                <input type="radio" name="from_stack" value="{{ 3 }}">
-                                <label for="{{ from_stack }}">3</label>
-                                <input type="radio" name="from_stack" value="{{ 4 }}">
-                                <label for="{{ from_stack }}">4</label>
-                            <button type="submit">Ciągnij karty ze stosu</button><br>
+                            {% if stack | length > 4 %}
+                                <input type="radio" name="from_stack" value="{{ 3 }}" class="f-left">
+                                <label for="{{ from_stack }}" class="f-left">3</label>
+                                <input type="radio" name="from_stack" value="{{ 4 }}" class="f-left">
+                                <label for="{{ from_stack }}" class="f-left">4</label>
+                            {% else %}
+                                <input type="radio" name="from_stack" value="{{ 3 }}" class="hidden" checked>
+                            {% endif %}
+                            <button type="submit">Ciągnij <i class="fa">&#xf107;</i></button><br>
                         </form>
                     {% endif %}
                     {% if next_label == 1 %}
-                        <form action="{{ url_for('play_human_next') }}" method="get">
+                        <form action="{{ url_for('play_next') }}" method="get">
                             <button type="submit">Zakończ</button><br>
                         </form>
                     {% endif %}

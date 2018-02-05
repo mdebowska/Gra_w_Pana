@@ -122,6 +122,7 @@ def play_game():
         # print('Sprawdź te karty:', check_cards)
         if game.check_if_good_to_add(check_cards):
             game.add_to_stack(cards, active_player)
+            return redirect(url_for('play_next'))
         # else:
         #     print('NIE ZGADZAM SIĘ!')
 
@@ -133,7 +134,7 @@ def play_game():
     return render_template('game.html', players=game.players, a_player = active_player, stack = game.stack, next_label = next_label, card_useful = card_useful_list)
 
 @app.route('/game/human/next', methods=['GET','POST'])
-def play_human_next():
+def play_next():
     """
     Page to change player
     :return:
@@ -170,6 +171,20 @@ def play_take_from_stack():
     # else:
         # print('coś poszło nie tak')
 
+
+    return redirect(url_for('play_game'))
+
+@app.route('/game/last/card', methods=['GET','POST'])
+def play_last():
+    """
+    Page to set last card in hand
+    :return:
+    """
+
+    if request.form.get('last_card'):
+        active_player = game.find_active_player()
+        last_card = active_player.hand[int(request.form.get('last_card'))]
+        active_player.set_last_card(last_card)
 
     return redirect(url_for('play_game'))
 

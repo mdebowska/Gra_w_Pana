@@ -44,6 +44,17 @@ class Person:
         if len(self.hand) == 0:
             return True
 
+    def set_last_card(self, last_card):
+        """
+        Ustawia wybraną kartę na końcu kolejki
+        :return:
+        """
+        # for card in self.hand:
+        #     if card == last_card
+        self.hand.remove(last_card)
+        self.hand.append(last_card)
+
+
 
     def set_useful_cards(self, game):
         """
@@ -55,16 +66,16 @@ class Person:
                 if len(self.layed_card) > 0:
                     if  self.layed_card[0].value == card.value:
                         card.useful = True
-                        print("usefulA: ", card)
+                        # print("usefulA: ", card)
                     else:
                         card.useful = False
-                        print("NIEusefulA: ", card)
+                        # print("NIEusefulA: ", card)
                 else:
                     card.useful = True
-                    print("usefulB: ", card)
+                    # print("usefulB: ", card)
             else:
                 card.useful = False
-                print("NIEusefulC: ", card)
+                # print("NIEusefulC: ", card)
 
     def make_useful_list(self):
         """

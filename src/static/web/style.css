@@ -169,3 +169,19 @@ section#stack_cards img{
     font-family: "Arial Black";
     text-transform: uppercase;
 }
+
+i{
+    font-weight: bold;
+    font-size: 24px;
+}
+i.material-icons{
+    font-size: 10px;
+}
+
+#players_cards form button, .f-left{
+    float: left;
+    margin: 2px;
+}
+input.f-left{
+    margin-top: 8px;
+}
