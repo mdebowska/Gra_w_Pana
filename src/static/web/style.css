@@ -69,6 +69,7 @@ hr{
     width: 70px;
     border: 1px solid #777777;
     border-radius: 9%;
+    cursor: pointer;
 }
 
 .checked{
@@ -184,4 +185,9 @@ i.material-icons{
 }
 input.f-left{
     margin-top: 8px;
+}
+
+.unuseful {
+    filter: brightness(0.7);
+    cursor: initial;
 }
